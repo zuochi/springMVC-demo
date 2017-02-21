@@ -1,0 +1,70 @@
+{
+    "code": 0,
+    "msg": "success",
+    "data": [
+        {
+            "id": 1,
+            "text": "菜单",
+            "children": [
+                {
+                    "id": 2,
+                    "text": "DEMO组件示例",
+                    "attributes": {
+                        "url": "/demo/components"
+                    }
+                },
+                {
+                    "id": 3,
+                    "text": "用户数据",
+                    "children": [
+                        {
+                            "id": 4,
+                            "text": "移动端活跃用户",
+                            "attributes": {
+                                "url": "/appData/userData"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "text": "多级菜单示例",
+                    "children": [
+                        {
+                            "id": 6,
+                            "text": "一级菜单",
+                            "children": [
+                                {
+                                    "id": 7,
+                                    "text": "二级菜单",
+                                    "children": [
+                                        {
+                                            "id": 8,
+                                            "text": "三级菜单-度娘",
+                                            "attributes": {
+                                                "url": "http://www.baidu.com"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "text": "更新索引",
+                    "children": [
+                        {
+                            "id": 10,
+                            "text": "全量索引",
+                            "attributes": {
+                                "url": "/solr/goDeltaImport"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

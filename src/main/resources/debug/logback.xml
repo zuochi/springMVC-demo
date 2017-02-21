@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="logPath" value="/data/wwwroot/solrAdmin/logs" />
+	<property name="pattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+	<property name="smtpHost" value="smtp.exmail.qq.com" />
+	<property name="smtpPort" value="25" />
+	<property name="username" value="bi_monxitor@mama.cn" />
+	<property name="password" value="B8a881xa7ad" />
+	<property name="SSL" value="false" />
+	<property name="email_to" value="bi_monixtor@mama.cn" /> />
+	<property name="email_from" value="bi_moxnitor@mama.cn" />
+	<property name="email_subject" value="" />
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logPath}/console.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logPath}/console.%d{yyyy-MM-dd}_%i.log.zip
+			</FileNamePattern>
+			<!-- 保留30天 -->
+			<MaxHistory>30</MaxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<!-- 日志每到50M，自动一打包 -->
+			<TimeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>50MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${pattern}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="email" class="com.tommy.web.mail.MySMTPAppender">
+		<smtpHost>${smtpHost}</smtpHost>
+		<smtpPort>${smtpPort}</smtpPort>
+		<username>${username}</username>
+		<password>${password}</password>
+		<SSL>${SSL}</SSL>
+		<asynchronousSending>true</asynchronousSending>
+		<to>${email_to}</to>
+		<from>${email_from}</from>
+		<subject>${email_subject}</subject>
+		<layout class="ch.qos.logback.classic.html.HTMLLayout">
+			<pattern>%date%level%thread%logger{0}%message</pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter" >
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<logger name="com.tommy.web" level="DEBUG">
+		<appender-ref ref="rollingFile" />
+		<appender-ref ref="console" />
+	</logger>
+	
+	<logger name="com.tommy" level="ERROR" additivity="false">
+		<appender-ref ref="email" />
+	</logger> 
+	
+	<root level="INFO" />
+</configuration>
